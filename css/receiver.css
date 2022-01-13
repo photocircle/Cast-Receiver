@@ -1,0 +1,23 @@
+cast-media-player {
+  --logo-image: url('res/welcome.png');
+  --splash-image: url('res/splash.png');
+  --splash-size: cover;
+}
+
+/* ------------------------------------------------- */
+/* Sample Overlay Text                               */
+/* ------------------------------------------------- */
+cast-media-player:after {
+  content: "SAMPLE";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  text-align: center;
+  font-size: 200px;
+  font-weight: bold;
+  margin-top: -150px;
+  opacity: 0.5;
+  color: red;
+}
