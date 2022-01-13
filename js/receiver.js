@@ -20,11 +20,13 @@ metadata.style.setProperty('display', 'none');
 let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
+let after = window.getComputedStyle(playerElement,':after');
+
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('timeupdate', () => {
+	after['content'] = video.currentTime
   if (video.currentTime == video.duration) video.pause();
 });
-
 
 const playbackConfig = new cast.framework.PlaybackConfig();
 playbackConfig.autoPauseDuration = 0.5;
