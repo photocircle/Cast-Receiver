@@ -7,9 +7,15 @@ let playerRoot = playerElement.shadowRoot;
 let playPause = playerRoot.querySelectorAll('.controlsPlayPause')[0];
 playPause.style.setProperty('position', 'relative');
 playPause.style.setProperty('left', '50%');
+playPause.style.setProperty('top', '100%');
+playPause.style.setProperty('margin-left', '-23px');
+playPause.style.setProperty('margin-top', '-46px');
 
 let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
+
+let metadata = playerRoot.querySelectorAll('.metadata')[0];
+metadata.style.setProperty('display', 'none');
 
 
 const playbackConfig = new cast.framework.PlaybackConfig();
