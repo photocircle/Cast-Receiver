@@ -1,6 +1,19 @@
 const context = cast.framework.CastReceiverContext.getInstance();
 
 
+const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
+castDebugLogger.setEnabled(true);
+castDebugLogger.showDebugLogs(true);
+castDebugLogger.loggerLevelByEvents = {
+  'cast.framework.events.category.CORE': cast.framework.LoggerLevel.INFO,
+  'cast.framework.events.EventType.MEDIA_STATUS': cast.framework.LoggerLevel.DEBUG
+};
+if (!castDebugLogger.loggerLevelByTags) {
+  castDebugLogger.loggerLevelByTags = {};
+}
+castDebugLogger.loggerLevelByTags['Receiver'] = cast.framework.LoggerLevel.DEBUG;
+
+
 let playerElement = document.getElementsByTagName("cast-media-player")[0];
 let playerRoot = playerElement.shadowRoot;
 
@@ -20,16 +33,25 @@ metadata.style.setProperty('display', 'none');
 let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
+
 let test = document.createElement('div');
-test.style.cssText = 'position:absolute;left:0;right:0;top:50%;bottom:0;text-align:center;font-size:40px;';
+test.style.cssText = 'position:absolute;left:0;right:0;top:50%;bottom:0;text-align:center;font-size:40px;color:#00FF00;';
 document.body.appendChild(test);
 test.innerHTML = "Ready"
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('timeupdate', () => {
   test.innerHTML = video.currentTime + " / " + video.duration;
-  if (video.currentTime == video.duration) video.pause();
+  if (video.currentTime == video.duration) {
+  	video.pause();
+  }
 });
+video.addEventListener('ended', () => {
+  test.innerHTML = "Ended";
+  video.pause();
+  video.currentTime = video.duration;
+});
+
 
 const playbackConfig = new cast.framework.PlaybackConfig();
 playbackConfig.autoPauseDuration = 0.5;
