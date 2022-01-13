@@ -1,9 +1,5 @@
 const context = cast.framework.CastReceiverContext.getInstance();
 
-// const playbackConfig = new cast.framework.PlaybackConfig();
-// playbackConfig.autoPauseDuration = 0.5;
-// playbackConfig.autoResumeDuration = 1.0;
-
 // let playerElement = document.getElementsByTagName("cast-media-player")[0];
 // let playerRoot = playerElement.shadowRoot;
 // let playPause = playerRoot.querySelectorAll('.controlsPlayPause')[0];
@@ -36,8 +32,7 @@ full.src = 'res/transparent.gif';
 full.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain;';
 document.body.appendChild(full);
 
-context.getPlayerManager().setMessageInterceptor(
-  cast.framework.messages.MessageType.LOAD, loadRequestData => {
+context.getPlayerManager().setMessageInterceptor(cast.framework.messages.MessageType.LOAD, loadRequestData => {
     thumb.src = loadRequestData.media.contentId.replace("/photo/", "/thumb/");
     full.src = loadRequestData.media.contentId;
     // video.poster = loadRequestData.media.contentId.replace("/video/", "/thumb/");
@@ -49,5 +44,10 @@ context.addEventListener(cast.framework.system.EventType.SENDER_DISCONNECTED, ()
   thumb.src = 'res/transparent.gif';
   full.src = 'res/transparent.gif';
 });
+
+
+const playbackConfig = new cast.framework.PlaybackConfig();
+// playbackConfig.autoPauseDuration = 0.5;
+// playbackConfig.autoResumeDuration = 1.0;
 
 context.start({playbackConfig: playbackConfig});
