@@ -23,8 +23,8 @@ document.body.appendChild(debug);
 debug.innerHTML = "v2" // TODO
 
 let preview = document.createElement('img');
-preview.style.cssText = 'height: 100%; width: 100%; object-fit: contain; background-color: #33FF0000;';
-document.body.appendChild(preview);
+preview.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain;';
+document.body.insertBefore(preview, document.body.firstChild);
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 // Disallow Chromecast to stop casting on the end
