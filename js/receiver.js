@@ -21,10 +21,11 @@ let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
 let after = window.getComputedStyle(playerElement,':after');
+after['content'] += " TEST";
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('timeupdate', () => {
-	after['content'] = video.currentTime
+  after['content'] = video.currentTime;
   if (video.currentTime == video.duration) video.pause();
 });
 
