@@ -30,15 +30,19 @@ test.innerHTML = "Ready"
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('loadedmetadata', () => {
-  video.poster = video.src.replace("/video/", "/photo/"); // TODO
+  test.innerHTML = "loadedmetadata";
+  video.poster = video.currentSrc.replace("/video/", "/thumb/").replace("/photo/", "/thumb/"); // TODO
   playPause.style.setProperty('display', 'block'); // TODO
+});
+video.addEventListener('canplay', () => {
+  test.innerHTML = "canplay";
 });
 video.addEventListener('timeupdate', () => {
   test.innerHTML = video.currentTime.toFixed(1) + " / " + video.duration.toFixed(1);
 });
 // Disallow Chromecast to stop casting on end
 video.addEventListener('ended', event => {
-  test.innerHTML = "Ended";
+  test.innerHTML = "ended";
   playPause.style.setProperty('display', 'none'); // TODO
   event.stopImmediatePropagation();
 }, true);
