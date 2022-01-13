@@ -1,11 +1,14 @@
 const context = cast.framework.CastReceiverContext.getInstance();
 
 
-let playPause = document.getElementsByClassName('controlsPlayPause')[0];
+let playerElement = document.getElementsByTagName("cast-media-player")[0];
+let playerRoot = playerElement.shadowRoot;
+
+let playPause = playerRoot.querySelectorAll('.controlsPlayPause')[0];
 playPause.style.setProperty('position', 'relative');
 playPause.style.setProperty('left', '50%');
 
-let timeline = document.getElementsByClassName('controlsTimeline')[0];
+let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
 
