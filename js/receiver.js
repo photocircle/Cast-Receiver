@@ -22,21 +22,23 @@ debug.style.cssText = 'position:absolute;left:0;right:0;top:2%;bottom:0;text-ali
 document.body.appendChild(debug);
 debug.innerHTML = "v2" // TODO
 
-context.getPlayerManager().setMessageInterceptor(
-  cast.framework.messages.MessageType.LOAD, loadRequestData => {
-    debug.innerHTML = "Load: " + loadRequestData.media.contentUrl + "/" + loadRequestData.media.contentId + "/" + loadRequestData.media.entity; // TODO
-    return loadRequestData;
-  }
-);
+let preview = document.createElement('img');
+preview.style.cssText = 'height: 100%; width: 100%; object-fit: contain;';
+document.body.insertBefore(preview, document.body.firstChild);
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
-video.addEventListener('loadedmetadata', () => {
-  video.poster = video.currentSrc.replace("/video/", "/thumb/");
-});
 // Disallow Chromecast to stop casting on the end
 video.addEventListener('ended', event => {
   event.stopImmediatePropagation();
 }, true);
+
+context.getPlayerManager().setMessageInterceptor(
+  cast.framework.messages.MessageType.LOAD, loadRequestData => {
+    preview.src = loadRequestData.media.contentId.replace("/photo/", "/thumb/");
+    video.poster = loadRequestData.media.contentId.replace("/video/", "/thumb/");
+    return loadRequestData;
+  }
+);
 
 
 const playbackConfig = new cast.framework.PlaybackConfig();
