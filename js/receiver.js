@@ -5,11 +5,13 @@ let playerElement = document.getElementsByTagName("cast-media-player")[0];
 let playerRoot = playerElement.shadowRoot;
 
 let playPause = playerRoot.querySelectorAll('.controlsPlayPause')[0];
+playPause.style.setProperty('width', '36px');
+playPause.style.setProperty('height', '36px');
 playPause.style.setProperty('position', 'relative');
 playPause.style.setProperty('left', '50%');
 playPause.style.setProperty('top', '100%');
-playPause.style.setProperty('margin-left', '-23px');
-playPause.style.setProperty('margin-top', '-46px');
+playPause.style.setProperty('margin-left', '-18px');
+playPause.style.setProperty('margin-top', '-36px');
 
 let gradient = playerRoot.querySelectorAll('.gradient')[0];
 gradient.style.setProperty('display', 'none');
@@ -22,19 +24,22 @@ timeline.style.setProperty('display', 'none');
 
 
 let test = document.createElement('div');
-test.style.cssText = 'position:absolute;left:0;right:0;top:50%;bottom:0;text-align:center;font-size:40px;color:#00FF00;';
+test.style.cssText = 'position:absolute;left:0;right:0;top:2%;bottom:0;text-align:center;font-size:40px;color:red;';
 document.body.appendChild(test);
 test.innerHTML = "Ready"
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
-video.addEventListener('timeupdate', () => {
-  test.innerHTML = video.currentTime + " / " + video.duration;
-  if (video.currentTime == video.duration) {
-  	video.pause();
-  }
+video.addEventListener('loadedmetadata', () => {
+  video.poster = video.src.replace("/video/", "/photo/"); // TODO
+  playPause.style.setProperty('display', 'block'); // TODO
 });
+video.addEventListener('timeupdate', () => {
+  test.innerHTML = video.currentTime.toFixed(1) + " / " + video.duration.toFixed(1);
+});
+// Disallow Chromecast to stop casting on end
 video.addEventListener('ended', event => {
   test.innerHTML = "Ended";
+  playPause.style.setProperty('display', 'none'); // TODO
   event.stopImmediatePropagation();
 }, true);
 
