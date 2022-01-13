@@ -20,11 +20,11 @@ timeline.style.setProperty('display', 'none');
 let debug = document.createElement('div');
 debug.style.cssText = 'position:absolute;left:0;right:0;top:2%;bottom:0;text-align:center;font-size:40px;color:red;';
 document.body.appendChild(debug);
-debug.innerHTML = "v1" // TODO
+debug.innerHTML = "v2" // TODO
 
 context.getPlayerManager().setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
-    debug.innerHTML = "Load: " + loadRequestData.media.contentUrl; // TODO
+    debug.innerHTML = "Load: " + loadRequestData.media.contentUrl + "/" + loadRequestData.media.contentId + "/" + loadRequestData.media.entity; // TODO
     return loadRequestData;
   }
 );
