@@ -1,19 +1,6 @@
 const context = cast.framework.CastReceiverContext.getInstance();
 
 
-const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
-castDebugLogger.setEnabled(true);
-castDebugLogger.showDebugLogs(true);
-castDebugLogger.loggerLevelByEvents = {
-  'cast.framework.events.category.CORE': cast.framework.LoggerLevel.INFO,
-  'cast.framework.events.EventType.MEDIA_STATUS': cast.framework.LoggerLevel.DEBUG
-};
-if (!castDebugLogger.loggerLevelByTags) {
-  castDebugLogger.loggerLevelByTags = {};
-}
-castDebugLogger.loggerLevelByTags['Receiver'] = cast.framework.LoggerLevel.DEBUG;
-
-
 let playerElement = document.getElementsByTagName("cast-media-player")[0];
 let playerRoot = playerElement.shadowRoot;
 
@@ -46,11 +33,10 @@ video.addEventListener('timeupdate', () => {
   	video.pause();
   }
 });
-video.addEventListener('ended', () => {
+video.addEventListener('ended', event => {
   test.innerHTML = "Ended";
-  video.pause();
-  video.currentTime = video.duration;
-});
+  event.stopImmediatePropagation();
+}, true);
 
 
 const playbackConfig = new cast.framework.PlaybackConfig();
