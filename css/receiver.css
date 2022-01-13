@@ -9,7 +9,7 @@ cast-media-player {
 /* Sample Overlay Text                               */
 /* ------------------------------------------------- */
 cast-media-player:after {
-  content: "v9";
+  content: "v11";
   position: absolute;
   left: 0;
   right: 0;

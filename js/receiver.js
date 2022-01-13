@@ -20,12 +20,14 @@ metadata.style.setProperty('display', 'none');
 let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
-let after = window.getComputedStyle(playerElement,':after');
-after['content'] += " TEST";
+let test = document.createElement('div');
+test.style.cssText = 'position:absolute;left:0;right:0;top:50%;bottom:0;text-align:center;font-size:40px;';
+document.body.appendChild(test);
+test.innerHTML = "Ready"
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('timeupdate', () => {
-  after['content'] = video.currentTime;
+  test.innerHTML = video.currentTime + " / " + video.duration;
   if (video.currentTime == video.duration) video.pause();
 });
 
