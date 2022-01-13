@@ -5,13 +5,7 @@ let playerElement = document.getElementsByTagName("cast-media-player")[0];
 let playerRoot = playerElement.shadowRoot;
 
 let playPause = playerRoot.querySelectorAll('.controlsPlayPause')[0];
-playPause.style.setProperty('width', '36px');
-playPause.style.setProperty('height', '36px');
-playPause.style.setProperty('position', 'relative');
-playPause.style.setProperty('left', '50%');
-playPause.style.setProperty('top', '100%');
-playPause.style.setProperty('margin-left', '-18px');
-playPause.style.setProperty('margin-top', '-36px');
+playPause.style.setProperty('display', 'none');
 
 let gradient = playerRoot.querySelectorAll('.gradient')[0];
 gradient.style.setProperty('display', 'none');
@@ -23,27 +17,16 @@ let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
 timeline.style.setProperty('display', 'none');
 
 
-let test = document.createElement('div');
-test.style.cssText = 'position:absolute;left:0;right:0;top:2%;bottom:0;text-align:center;font-size:40px;color:red;';
-document.body.appendChild(test);
-test.innerHTML = "Ready"
+let debug = document.createElement('div');
+debug.style.cssText = 'position:absolute;left:0;right:0;top:2%;bottom:0;text-align:center;font-size:40px;color:red;';
+document.body.appendChild(debug);
 
 let video = playerRoot.querySelectorAll('.mediaElement')[0];
 video.addEventListener('loadedmetadata', () => {
-  test.innerHTML = "loadedmetadata";
-  video.poster = video.currentSrc.replace("/video/", "/thumb/").replace("/photo/", "/thumb/"); // TODO
-  playPause.style.setProperty('display', 'block'); // TODO
+  video.poster = video.currentSrc.replace("/video/", "/thumb/");
 });
-video.addEventListener('canplay', () => {
-  test.innerHTML = "canplay";
-});
-video.addEventListener('timeupdate', () => {
-  test.innerHTML = video.currentTime.toFixed(1) + " / " + video.duration.toFixed(1);
-});
-// Disallow Chromecast to stop casting on end
+// Disallow Chromecast to stop casting on the end
 video.addEventListener('ended', event => {
-  test.innerHTML = "ended";
-  playPause.style.setProperty('display', 'none'); // TODO
   event.stopImmediatePropagation();
 }, true);
 
