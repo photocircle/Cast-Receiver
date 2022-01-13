@@ -4,15 +4,18 @@ cast-media-player {
   --splash-size: cover;
 }
 
-#castControlsTimeline {
-  display: none;
+.controlsTimeline {
+  display: none !important;
+}
+.controlsPlayPause {
+  float: center !important;
 }
 
 /* ------------------------------------------------- */
 /* Sample Overlay Text                               */
 /* ------------------------------------------------- */
 cast-media-player:after {
-  content: "v1";
+  content: "v2";
   position: absolute;
   left: 0;
   right: 0;
