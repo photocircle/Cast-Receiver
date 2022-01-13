@@ -1,9 +1,9 @@
+body {
+  margin: 0;
+}
+
 cast-media-player {
   --logo-image: url('res/logo.png');
   --splash-image: url('res/splash.jpg');
   --splash-size: cover;
-}
-
-.body {
-  margin: 0;
 }
