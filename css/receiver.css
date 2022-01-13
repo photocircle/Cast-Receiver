@@ -3,3 +3,7 @@ cast-media-player {
   --splash-image: url('res/splash.jpg');
   --splash-size: cover;
 }
+
+.body {
+  margin: 0;
+}
