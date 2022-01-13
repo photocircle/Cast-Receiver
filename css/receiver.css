@@ -4,7 +4,7 @@ cast-media-player {
   --splash-size: cover;
 }
 
-.controlsTimeline {
+#castControlsTimeline {
   display: none;
 }
 
