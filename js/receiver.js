@@ -11,11 +11,14 @@ playPause.style.setProperty('top', '100%');
 playPause.style.setProperty('margin-left', '-23px');
 playPause.style.setProperty('margin-top', '-46px');
 
-let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
-timeline.style.setProperty('display', 'none');
+let gradient = playerRoot.querySelectorAll('.gradient')[0];
+gradient.style.setProperty('display', 'none');
 
 let metadata = playerRoot.querySelectorAll('.metadata')[0];
 metadata.style.setProperty('display', 'none');
+
+let timeline = playerRoot.querySelectorAll('.controlsTimeline')[0];
+timeline.style.setProperty('display', 'none');
 
 
 const playbackConfig = new cast.framework.PlaybackConfig();
