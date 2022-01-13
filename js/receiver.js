@@ -38,7 +38,11 @@ context.getPlayerManager().setMessageInterceptor(
   cast.framework.messages.MessageType.LOAD, loadRequestData => {
     preview.src = loadRequestData.media.contentId.replace("/photo/", "/thumb/");
     video.poster = loadRequestData.media.contentId.replace("/video/", "/thumb/");
-    return if (c++ % 2 == 0) { loadRequestData } else { null };
+    if (c++ % 2 == 0) {
+      return loadRequestData;
+    } else {
+      return null;
+    }
   }
 );
 
