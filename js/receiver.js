@@ -24,7 +24,7 @@ const context = cast.framework.CastReceiverContext.getInstance();
 
 let thumb = document.createElement('img');
 thumb.src = 'res/transparent.gif';
-thumb.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain;';
+thumb.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain; filter: blur(2px);';
 document.body.appendChild(thumb);
 
 let full = document.createElement('img');
@@ -34,6 +34,7 @@ document.body.appendChild(full);
 
 context.getPlayerManager().setMessageInterceptor(cast.framework.messages.MessageType.LOAD, loadRequestData => {
     thumb.src = loadRequestData.media.contentId.replace("/photo/", "/thumb/");
+    full.src = 'res/transparent.gif';
     full.src = loadRequestData.media.contentId;
     // video.poster = loadRequestData.media.contentId.replace("/video/", "/thumb/");
     return null;
