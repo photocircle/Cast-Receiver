@@ -12,18 +12,19 @@ function show(type, src) {
     srcMap.delete("thumb")  // Avoid showing thumb image, if full is already loaded
     if (currentImg) currentImg.remove();
     currentImg = img;
-    if (type == "thumb") {
-      // Small delay to make full image more chances to show up first
-      setTimeout(() => { if (currentImg == img) document.body.appendChild(img); }, 300);
-    } else {
-      document.body.appendChild(img);
-    }
+    document.body.appendChild(img);
   }
   img.onerror = () => {
     if (src != srcMap.get(type)) return
     if (currentImg) currentImg.remove();
   }
-  img.src = src;
+
+  if (type == "thumb") {
+    // Small delay to make full image more chances to show up first
+    setTimeout(() => { img.src = src; }, 300);
+  } else {
+    img.src = src;
+  }
 }
 
 export function showImage(src) {
