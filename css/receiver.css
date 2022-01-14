@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: black;
 }
 
 .fullscreen {
@@ -8,17 +9,11 @@ body {
   width: 100%;
 }
 
-.splash {
-  object-fit: cover;
+.logo {
+  object-fit: none;
 }
 
-.img-thumb {
-  background-color: black;
-  object-fit: contain;
-  filter: blur(2px);
-}
-
-.img-full {
+.img {
   background-color: black;
   object-fit: contain;
 }

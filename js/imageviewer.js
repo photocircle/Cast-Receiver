@@ -6,7 +6,7 @@ let currentImg = null;
 function show(type, src) {
   srcMap.set(type, src);
   let img = new Image();
-  img.classList.add("img-" + type, "fullscreen");
+  img.classList.add("img", "fullscreen");
   img.onload = () => {
     if (src != srcMap.get(type)) return;
     srcMap.delete("thumb")  // Avoid showing thumb image, if full is already loaded
