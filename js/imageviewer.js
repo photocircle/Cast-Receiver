@@ -21,7 +21,7 @@ function show(type, src) {
 
   if (type == "thumb") {
     // Small delay to make full image more chances to show up first
-    setTimeout(() => { img.src = src; }, 300);
+    setTimeout(() => { img.src = src; }, 100);
   } else {
     img.src = src;
   }
