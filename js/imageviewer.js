@@ -10,7 +10,7 @@ function showThumbImage(src) {
   img.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain; filter: blur(2px);';
   img.onload = () => {
     if (src == thumbSrc) {
-      if (currentImg) crossfade(currentImg, img);
+      if (currentImg) currentImg.remove();
       currentImg = img;
       document.body.appendChild(img);
     }
@@ -25,27 +25,12 @@ function showFullImage(src) {
   img.onload = () => {
     if (src == fullSrc) {
       thumbSrc = null; // Avoid adding thumb image
-      if (currentImg) crossfade(currentImg, img);
+      if (currentImg) currentImg.remove();
       currentImg = img;
       document.body.appendChild(img);
     }
   }
   img.src = src;
-}
-
-function crossfade(from, to) {
-    let step = 1000 / 24; // 24 fps
-    let duration = 500;
-    let opacity = 0;
-    to.style.opacity = 0;
-    let instance = window.setInterval(() => {
-      opacity += step / duration;
-      to.style.opacity = opacity;
-      if (opacity > 1) {
-        window.clearInterval(instance);
-        from.remove();
-      }
-    }, step);
 }
 
 export function showImage(src) {
