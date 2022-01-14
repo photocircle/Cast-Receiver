@@ -16,7 +16,7 @@ body {
 .img-thumb {
   background-color: black;
   object-fit: contain;
-  filter: blur(1px);
+  filter: blur(2px);
 }
 
 .img-full {
