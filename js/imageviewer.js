@@ -34,8 +34,8 @@ function showFullImage(src) {
 }
 
 function crossfade(from, to) {
-    let step = 1000 / 60; // 60 fps
-    let duration = 300;
+    let step = 1000 / 24; // 24 fps
+    let duration = 500;
     let opacity = 0;
     to.style.opacity = 0;
     let instance = window.setInterval(() => {
