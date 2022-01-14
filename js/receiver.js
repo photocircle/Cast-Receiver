@@ -18,4 +18,4 @@ context.getPlayerManager().setMessageInterceptor(cast.framework.messages.Message
 
 const options = new cast.framework.CastReceiverOptions();
 options.disableIdleTimeout = true;
-context.start();
+context.start(options);
