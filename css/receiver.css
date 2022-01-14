@@ -13,7 +13,13 @@ body {
   object-fit: none;
 }
 
-.img {
+.img-thumb {
+  background-color: black;
+  object-fit: contain;
+  filter: blur(1px);
+}
+
+.img-full {
   background-color: black;
   object-fit: contain;
 }
