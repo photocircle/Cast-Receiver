@@ -1,39 +1,27 @@
 // Custom image loader that will attempt to show thumbnail before the full image
 
-let thumbSrc = null;
-let fullSrc = null;
+let srcMap = new Map();
 let currentImg = null;
 
-function showThumbImage(src) {
-  thumbSrc = src;
+function show(type, src) {
+  srcMap.set(type, src);
   let img = new Image();
-  img.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain; filter: blur(2px);';
+  img.classList.add("img-" + type, "fullscreen");
   img.onload = () => {
-    if (src == thumbSrc) {
-      if (currentImg) currentImg.remove();
-      currentImg = img;
-      document.body.appendChild(img);
-    }
+    if (src != srcMap.get(type)) return;
+    srcMap.delete("thumb")  // Avoid showing thumb image, if full is already loaded
+    if (currentImg) currentImg.remove();
+    currentImg = img;
+    document.body.appendChild(img);
   }
-  img.src = src;
-}
-
-function showFullImage(src) {
-  fullSrc = src;
-  let img = new Image();
-  img.style.cssText = 'position: absolute; height: 100%; width: 100%; object-fit: contain;';
-  img.onload = () => {
-    if (src == fullSrc) {
-      thumbSrc = null; // Avoid adding thumb image
-      if (currentImg) currentImg.remove();
-      currentImg = img;
-      document.body.appendChild(img);
-    }
+  img.onerror = () => {
+    if (src != srcMap.get(type)) return
+    if (currentImg) currentImg.remove();
   }
   img.src = src;
 }
 
 export function showImage(src) {
-  showThumbImage(src.replace("/photo/", "/thumb/"));
-  showFullImage(src);
+  if (src.includes("/photo/")) show("thumb", src.replace("/photo/", "/thumb/"));
+  show("full", src);
 }

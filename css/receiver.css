@@ -2,8 +2,23 @@ body {
   margin: 0;
 }
 
-cast-media-player {
-  --logo-image: url('res/logo.png');
-  --splash-image: url('res/splash.jpg');
-  --splash-size: cover;
+.fullscreen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.splash {
+  object-fit: cover;
+}
+
+.img-thumb {
+  background-color: black;
+  object-fit: contain;
+  filter: blur(2px);
+}
+
+.img-full {
+  background-color: black;
+  object-fit: contain;
 }
